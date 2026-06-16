@@ -48,9 +48,10 @@ jobs:
       - name: Generowanie dokumentacji Frontendu (JavaScript)
         run: |
           cd client
-          # 1. Wyciągnięcie JSDoc do pliku pośredniego
-          jsdoc2md src/**/*.js > frontend_temp.md
-          # 2. Pandoc konwertuje plik na format AsciiDoc do folderu docs/
+          # 1. Ścieżka: szukamy wewnątrz folderu 'js'
+          jsdoc2md "js/**/*.js" > frontend_temp.md
+          
+          # 2. Konwersja na AsciiDoc
           pandoc -f markdown -t asciidoc frontend_temp.md -o ../docs/frontend.adoc
           rm frontend_temp.md
 
