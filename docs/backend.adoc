@@ -91,4 +91,111 @@ Tworzy i konfiguruje instancję Flask.
 Zwraca skonfigurowaną aplikację. Funkcja wykonuje minimalne
 bootstrapowanie (CORS, połączenie do bazy, rejestracja blueprintów).
 
-== routes
+== routes.tracks
+
+Routes (endpoints) related to tracks and recommendations.
+
+Ten moduł udostępnia trzy główne endpointy: - GET
+/tracks/search?q=…&search_by=title|artist — autocomplete / search - GET
+/tracks/ — szczegóły pojedynczego utworu (seed) - GET
+/tracks//recommendations — rekomendacje oparte na tagach i filtrach
+
+Parametry filtrowania rekomendacji: - energy_tolerance (float, 0.0-1.0)
+- year_tolerance (int) - artist_match (bool, `true' w URL)
+
+=== search_tracks
+
+[source,python]
+----
+@tracks_bp.route('/tracks/search', methods=['GET'])
+def search_tracks()
+----
+
+Search endpoint used by frontend autocomplete.
+
+Query params: q (str): zapytanie — minimum 3 znaki search_by (str):
+`title' (domyślnie) lub `artist'
+
+Returns JSON list of objects: \{spotify_id, title, artist}
+
+=== get_track_details
+
+[source,python]
+----
+@tracks_bp.route('/tracks/<spotify_id>', methods=['GET'])
+def get_track_details(spotify_id)
+----
+
+Zwraca szczegóły pojedynczego utworu (seed) wraz z tagami.
+
+Path param: spotify_id (str): identyfikator utworu w Spotify
+
+Zwracany JSON: \{ title, artist, year, tags, spotify_id }
+
+=== get_recommendations
+
+[source,python]
+----
+@tracks_bp.route('/tracks/<spotify_id>/recommendations', methods=['GET'])
+def get_recommendations(spotify_id)
+----
+
+Generuje rekomendacje na podstawie taga/seeda z opcjonalnymi filtrami.
+
+Query params: energy_tolerance (float): tolerancja energii, spodziewane
+0.0-1.0 year_tolerance (int): tolerancja w latach artist_match (bool):
+`true' aby ograniczyć do tego samego artysty limit (int): maksymalna
+liczba wyników
+
+Zwraca listę rekomendacji z informacją o liczbie współdzielonych tagów.
+
+== routes.tags
+
+Endpoints dla eksploratora tagów i filtrowania utworów.
+
+Udostępnia: - GET /tags/popular — listę najpopularniejszych tagów - GET
+/tags/related — listę tagów powiązanych z wybranym zestawem tagów - GET
+/tracks — filtrowanie utworów po tagach i roku (używane przez explorer)
+
+=== get_popular_tags
+
+[source,python]
+----
+@tags_bp.route('/tags/popular', methods=['GET'])
+def get_popular_tags()
+----
+
+Zwraca listę najpopularniejszych tagów.
+
+Response: lista obiektów \{ tag_name, popularity }
+
+=== get_related_tags
+
+[source,python]
+----
+@tags_bp.route('/tags/related', methods=['GET'])
+def get_related_tags()
+----
+
+Zwraca tagi powiązane z podanym zbiorem tagów.
+
+Query params: tags (str): przecinkowo oddzielona lista tagów (np.
+`rock,indie')
+
+Response: lista obiektów \{ related_tag, frequency }
+
+=== filter_tracks
+
+[source,python]
+----
+@tags_bp.route('/tracks', methods=['GET'])
+def filter_tracks()
+----
+
+Filtruje utwory po zadanych tagach oraz opcjonalnym zakresie lat.
+
+Query params: tags (str): wymagane, przecinkowo oddzielona lista tagów
+year_min (int): opcjonalnie - minimalny rok year_max (int): opcjonalnie
+- maksymalny rok limit (int): maksymalna liczba wyników
+
+Response: lista obiektów \{ title, artist, year, tags, spotify_id }
