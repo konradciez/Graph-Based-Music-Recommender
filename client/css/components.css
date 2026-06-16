@@ -1,0 +1,48 @@
+/* component-level styles (buttons, sliders, small helpers) */
+.go-btn{ font-size:16px; }
+.accent{ color:var(--accent); }
+.muted{ color:var(--muted); }
+
+
+.filter-item{ display:flex; align-items:center; gap:12px; }
+.filter-item input[type="checkbox"]{ transform:scale(1.05); margin-right:8px }
+/* Small vertical padding for the artist-only filter to align checkbox spacing */
+.filter-item.artist-only{ padding:6px 0; }
+
+.range-controls{ display:flex; gap:8px; align-items:center; justify-content:center; padding: 6px }
+.range-controls input[type=range]{ width:320px }
+.range-values{ margin-left:12px; color:var(--muted) }
+
+.number-control{ display:inline-flex; align-items:center; gap:8px }
+.number-control .value{ min-width:30px; text-align:center; display:inline-block }
+.number-control .nav-btn.small{ padding:6px 8px; font-size:14px; border-radius:12px }
+
+/* Make numeric inputs with .value look like the span.value used elsewhere */
+.number-control input.value{ min-width:44px; text-align:center; display:inline-block; border:none; background:transparent; color:inherit; font-size:14px }
+.number-control input.value::-webkit-outer-spin-button,
+.number-control input.value::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0 }
+.number-control input.value{ -moz-appearance:textfield }
+.range-controls .separator{ padding:0 6px }
+.number-control .suffix{ color:var(--muted); font-size:13px }
+
+.nav-btn.small{ padding:6px 8px; font-size:14px; border-radius:12px }
+.nav-btn{ background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted); padding:6px 10px; border-radius:14px; cursor:pointer }
+.nav-btn.active{ background:var(--accent); color:#fff }
+
+.spotify-link{ transition:transform .12s ease }
+.spotify-link:hover{ transform:translateY(-2px) }
+
+.suggestions .muted{ color:var(--muted); font-size:13px }
+
+/* Tag explorer styles */
+.tags-stack{ display:flex; flex-direction:column; gap:14px; align-items:center; margin:18px 0; }
+.tags-row{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+.tag-pill{ background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); padding:10px 16px; border-radius:14px; color:var(--muted); cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:all .12s ease; }
+.tag-pill .count{ font-size:12px; background: rgba(0,0,0,0.15); padding:2px 6px; border-radius:8px; margin-left:6px; color:var(--muted); }
+.tag-pill.selected{ background:var(--accent); color:#fff; box-shadow:0 6px 18px rgba(0,110,255,0.12); }
+.inactive-row{ opacity:0.6; filter:grayscale(10%); }
+.inactive-row .tag-pill{ pointer-events:none; }
+.no-suggestions{ color:var(--muted); padding:8px 12px; }
+.tags{ margin-top:6px; display:flex; gap:8px; flex-wrap:wrap }
+.tag{ background: rgba(255,255,255,0.02); padding:4px 8px; border-radius:8px; color:var(--muted); font-size:12px }
+
