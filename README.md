@@ -1,4 +1,7 @@
-## Dokumentacja i dokumentacja kodu w folderze docs
+## GBMR
+### Konrad Ciężadło
+
+## Dokumentacja
 Szczegółowa dokumentacja projektu oraz architektury kodu znajduje się w katalogu `docs/`.
 
 ---
