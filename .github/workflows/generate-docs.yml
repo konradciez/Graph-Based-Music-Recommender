@@ -40,7 +40,7 @@ jobs:
         run: |
           cd server
           # 1. uv instaluje pydoc-markdown w locie i generuje plik pośredni
-          uv run --with pydoc-markdown pydoc-markdown -I . -m db -m main -m routes > backend_temp.md
+          uv run --with pydoc-markdown pydoc-markdown -I . -m db -m main -m routes.tracks -m routes.tags > backend_temp.md
           # 2. Pandoc konwertuje plik na format AsciiDoc do folderu docs/
           pandoc -f markdown -t asciidoc backend_temp.md -o ../docs/backend.adoc
           rm backend_temp.md
