@@ -47,7 +47,7 @@ jobs:
 
       - name: Generowanie dokumentacji Frontendu (JavaScript)
         run: |
-          cd frontend # Ścieżka do Twojego kodu SPA
+          cd client
           # 1. Wyciągnięcie JSDoc do pliku pośredniego
           jsdoc2md src/**/*.js > frontend_temp.md
           # 2. Pandoc konwertuje plik na format AsciiDoc do folderu docs/
