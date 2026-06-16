@@ -1,12 +1,15 @@
-## GBMR
-### Konrad Ciężadło
+### Graph-Based-Music-Recommender
 
-## Dokumentacja
+Konrad Ciężadło
+
+---
+
+# Dokumentacja
 Szczegółowa dokumentacja projektu oraz architektury kodu znajduje się w katalogu `docs/`.
 
 ---
 
-## Uruchomienie lokalne
+# Uruchomienie lokalne
 
 ### Server
 
