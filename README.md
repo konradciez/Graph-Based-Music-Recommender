@@ -11,6 +11,12 @@ Szczegółowa dokumentacja projektu oraz architektury kodu znajduje się w katal
 
 # Uruchomienie lokalne
 
+### Wymagania
+
+- Python 3.12+
+- Narzędzie `uv`
+- Plik `.env`
+
 ### Server
 
 Przed uruchomieniem backendu; katalog `server/` musi zawierać plik **`.env`**.
