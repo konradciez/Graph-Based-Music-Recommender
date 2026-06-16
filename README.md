@@ -1,17 +1,24 @@
-Instrukacja uruchomienia serwisu lokalnie:
+## Dokumentacja i dokumentacja kodu w folderze docs
+Szczegółowa dokumentacja projektu oraz architektury kodu znajduje się w katalogu `docs/`.
 
-### Server:
+---
 
-`cd server`
+## Uruchomienie lokalne
 
-`uv run python main.py`
+### Server
 
-Plik **.env** należy umieścić w katalogu **server**.
+Przed uruchomieniem backendu; katalog `server/` musi zawierać plik **`.env`**.
+
+```
+cd server
+uv run python main.py
+```
 
 ### Client
 
-`cd client`
+```
+cd client
+python -m http.server 8000
+```
 
-`python -m http.server 8000`
-
-Serwis jest dostępny lokalnie pod adresem **http://127.0.0.1:8000**.
+Serwis jest dostępny w przeglądarce pod adresem: http://127.0.0.1:8000
