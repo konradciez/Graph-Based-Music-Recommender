@@ -1,0 +1,280 @@
+== Constants
+
+API_BASE
+
+API client wrapper
+
+Małe API pomocnicze do wywołań endpointów backendu. Wszystkie funkcje
+zwracają Promise z parsowanym JSON-em lub null/[] przy błędach.
+
+== Functions
+
+searchTracks(q, [search_by]) ⇒ Promise.<Array>
+
+Search tracks by query.
+
+getTrack(spotify_id) ⇒ Promise.<(Object|null)>
+
+Get single track details by spotify_id.
+
+getRecommendations(spotify_id, opts) ⇒ Promise.<Array>
+
+Get recommendations for a seed track.
+
+getPopularTags() ⇒ Promise.<Array.<\{tag_name:string,
+popularity:number}>>
+
+Get popular tags used by explorer.
+
+getRelatedTags(tags) ⇒ Promise.<Array.<\{related_tag:string,
+frequency:number}>>
+
+Get related tags for a list of selected tags.
+
+getTracksByTags(tags, year_min, year_max, [limit]) ⇒ Promise.<Array>
+
+Get tracks that match all provided tags and optional year range.
+
+renderExplorer()
+
+Renderuje widok eksploratora tagów i inicjalizuje pierwszy (popular)
+rząd.
+
+loadPopularTags()
+
+Pobiera najpopularniejsze tagi i tworzy pierwszy rząd przycisków.
+
+toggleTag()
+
+Obsługuje zaznaczanie/odznaczanie taga. Zapisuje informację o tagOrigins
+aby tylko instancja taga w źródłowym rzędzie była podświetlona.
+
+updateRelatedTags()
+
+Pobiera powiązane tagi dla aktualnego zestawu state.selectedTags i
+tworzy nowy rząd sugestii.
+
+createTagRow(items, rowIndex)
+
+Tworzy nowy rząd przycisków z listą tagów.
+
+highlightSelectedButtons()
+
+Podświetla tylko te przyciski .tag-pill, które odpowiadają zapamiętanym
+origins.
+
+resetExplorer()
+
+Resetuje wybór tagów (przywraca tylko pierwszy rząd popularnych tagów).
+
+fetchTracksForTags()
+
+Pobiera utwory dopasowane do state.selectedTags i zakresu lat i
+renderuje wyniki.
+
+renderRecommender()
+
+Renderuje widok Recommender i podłącza handlery.
+
+attachRecommenderHandlers()
+
+Przywiązuje event handlery do elementów w widoku Recommender. Obsługuje:
+search autocomplete, przyciski +/- przy filtrach oraz przełącznik
+Title/Artist.
+
+selectSuggestion(spotify_id)
+
+Wywoływane po wybraniu sugestii z listy. Czyści pole wyszukiwania,
+pobiera dane seed-track i żąda rekomendacji.
+
+renderSeedAndResults(seed, recs)
+
+Renderuje seed (wybrany utwór) oraz listę rekomendacji poniżej.
+
+== API_BASE
+
+API client wrapper
+
+Małe API pomocnicze do wywołań endpointów backendu. Wszystkie funkcje
+zwracają Promise z parsowanym JSON-em lub `null`/`[]` przy błędach.
+
+*Kind*: global constant +
+
+== searchTracks(q, [search_by]) ⇒ Promise.<Array>
+
+Search tracks by query.
+
+*Kind*: global function +
+*Returns*: Promise.<Array> - list of tracks: \{ spotify_id, title,
+artist }
+
+[width="100%",cols="25%,25%,25%,25%",options="header",]
+|===
+|Param |Type |Default |Description
+|q |string | |query string (min 3 chars)
+|[search_by] |string |"'title'" |`title' or `artist'
+|===
+
+== getTrack(spotify_id) ⇒ Promise.<(Object|null)>
+
+Get single track details by spotify_id.
+
+*Kind*: global function +
+*Returns*: Promise.<(Object|null)> - track object or null
+
+[cols=",",options="header",]
+|===
+|Param |Type
+|spotify_id |string
+|===
+
+== getRecommendations(spotify_id, opts) ⇒ Promise.<Array>
+
+Get recommendations for a seed track.
+
+*Kind*: global function +
+*Returns*: Promise.<Array> - list of recommendation objects
+
+[width="100%",cols="34%,33%,33%",options="header",]
+|===
+|Param |Type |Description
+|spotify_id |string |
+
+|opts |Object |options: \{ energy_tolerance: float(0-1), year_tolerance:
+int, artist_match: bool, limit: int }
+|===
+
+== getPopularTags() ⇒ Promise.<Array.<\{tag_name:string, popularity:number}>>
+
+Get popular tags used by explorer.
+
+*Kind*: global function +
+
+== getRelatedTags(tags) ⇒ Promise.<Array.<\{related_tag:string, frequency:number}>>
+
+Get related tags for a list of selected tags.
+
+*Kind*: global function
+
+[cols=",",options="header",]
+|===
+|Param |Type
+|tags |Array.<string>
+|===
+
+== getTracksByTags(tags, year_min, year_max, [limit]) ⇒ Promise.<Array>
+
+Get tracks that match all provided tags and optional year range.
+
+*Kind*: global function +
+*Returns*: Promise.<Array> - list of track objects
+
+[cols=",,",options="header",]
+|===
+|Param |Type |Default
+|tags |Array.<string> |
+|year_min |number \| null |
+|year_max |number \| null |
+|[limit] |number |50
+|===
+
+== renderExplorer()
+
+Renderuje widok eksploratora tagów i inicjalizuje pierwszy (popular)
+rząd.
+
+*Kind*: global function +
+
+== loadPopularTags()
+
+Pobiera najpopularniejsze tagi i tworzy pierwszy rząd przycisków.
+
+*Kind*: global function +
+
+== toggleTag()
+
+Obsługuje zaznaczanie/odznaczanie taga. Zapisuje informację o
+`tagOrigins` aby tylko instancja taga w źródłowym rzędzie była
+podświetlona.
+
+*Kind*: global function +
+
+== updateRelatedTags()
+
+Pobiera powiązane tagi dla aktualnego zestawu `state.selectedTags` i
+tworzy nowy rząd sugestii.
+
+*Kind*: global function +
+
+== createTagRow(items, rowIndex)
+
+Tworzy nowy rząd przycisków z listą tagów.
+
+*Kind*: global function
+
+[width="100%",cols="34%,33%,33%",options="header",]
+|===
+|Param |Type |Description
+|items |Array |elementy tagów (obiekty z tag_name/popularity)
+|rowIndex |number |indeks rzędu (0..n)
+|===
+
+== highlightSelectedButtons()
+
+Podświetla tylko te przyciski `.tag-pill`, które odpowiadają
+zapamiętanym origins.
+
+*Kind*: global function +
+
+== resetExplorer()
+
+Resetuje wybór tagów (przywraca tylko pierwszy rząd popularnych tagów).
+
+*Kind*: global function +
+
+== fetchTracksForTags()
+
+Pobiera utwory dopasowane do `state.selectedTags` i zakresu lat i
+renderuje wyniki.
+
+*Kind*: global function +
+
+== renderRecommender()
+
+Renderuje widok Recommender i podłącza handlery.
+
+*Kind*: global function +
+
+== attachRecommenderHandlers()
+
+Przywiązuje event handlery do elementów w widoku Recommender. Obsługuje:
+search autocomplete, przyciski +/- przy filtrach oraz przełącznik
+Title/Artist.
+
+*Kind*: global function +
+
+== selectSuggestion(spotify_id)
+
+Wywoływane po wybraniu sugestii z listy. Czyści pole wyszukiwania,
+pobiera dane seed-track i żąda rekomendacji.
+
+*Kind*: global function
+
+[cols=",",options="header",]
+|===
+|Param |Type
+|spotify_id |string
+|===
+
+== renderSeedAndResults(seed, recs)
+
+Renderuje seed (wybrany utwór) oraz listę rekomendacji poniżej.
+
+*Kind*: global function
+
+[cols=",",options="header",]
+|===
+|Param |Type
+|seed |Object
+|recs |Array
+|===

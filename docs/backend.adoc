@@ -1,0 +1,94 @@
+== db
+
+Neo4j connection helper.
+
+Moduł dostarcza klasy `Neo4jConnection` upraszczającej zarządzanie
+połączeniem do bazy Neo4j oraz wykonywanie zapytań odczytu.
+
+Konfiguracja (URI, user, password) jest ładowana z pliku `.env` przez
+`python-dotenv` i pobierana z `os.environ`.
+
+Przykład użycia: from db import db rows = db.execute_read(`MATCH (n)
+RETURN n LIMIT 10')
+
+=== Neo4jConnection Objects
+
+[source,python]
+----
+class Neo4jConnection()
+----
+
+Wrapper dla Neo4j driver.
+
+Zapewnia prosty interfejs do: - inicjalizacji połączenia (`connect`), -
+zamykania (`close`), - wykonywania zapytań odczytu (`execute_read`).
+
+Używamy tutaj `execute_read` na sesji, co jest zgodne z rekomendacjami
+Neo4j dla operacji odczytu.
+
+==== connect
+
+[source,python]
+----
+def connect()
+----
+
+Inicjalizuje połączenie (`self.driver`) na podstawie zmiennych
+środowiskowych.
+
+Oczekiwane zmienne środowiskowe: - NEO4J_URI - NEO4J_USERNAME -
+NEO4J_PASSWORD
+
+Jeśli brak wymaganych wartości, metoda wypisuje ostrzeżenie i nic nie
+robi.
+
+==== close
+
+[source,python]
+----
+def close()
+----
+
+Zamyka aktywny driver, jeśli istnieje.
+
+==== execute_read
+
+[source,python]
+----
+def execute_read(query, parameters=None)
+----
+
+Wykonuje zapytanie odczytu i zwraca listę wyników.
+
+*Arguments*:
+
+* `query` _str_ - cypher query
+* `parameters` _dict|None_ - opcjonalne parametry dla zapytania
+
+*Returns*:
+
+* `list[dict]` - lista rekordów zwróconych przez Neo4j (każdy rekord
+jako słownik)
+
+== main
+
+Flask application factory and entry point.
+
+Konfiguruje i zwraca aplikację Flask z włączonym CORS oraz podłączonym
+połączeniem do Neo4j. Blueprinty dla tras są rejestrowane tutaj.
+
+Uruchamianie lokalne: python main.py
+
+=== create_app
+
+[source,python]
+----
+def create_app()
+----
+
+Tworzy i konfiguruje instancję Flask.
+
+Zwraca skonfigurowaną aplikację. Funkcja wykonuje minimalne
+bootstrapowanie (CORS, połączenie do bazy, rejestracja blueprintów).
+
+== routes
