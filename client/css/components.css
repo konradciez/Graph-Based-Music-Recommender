@@ -37,6 +37,36 @@
 /* Tag explorer styles */
 .tags-stack{ display:flex; flex-direction:column; gap:14px; align-items:center; margin:18px 0; }
 .tags-row{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+/* First (popular) row: fixed max-width with horizontal scrolling */
+#popular-tags{
+	max-width:1100px;
+	overflow-x:auto;
+	overflow-y:hidden;
+	justify-content:flex-start;
+	display:flex;
+	flex-wrap:nowrap;
+	align-items:center;
+	gap:12px;
+	padding:6px 6px;
+	box-sizing:border-box;
+	/* max-height:48px;  */
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: thin;
+}
+#popular-tags .tag-pill{ flex:0 0 auto; display:inline-flex; margin-right:6px; }
+/* WebKit-based browser scrollbar styling */
+#popular-tags::-webkit-scrollbar{ height:6px; }
+#popular-tags::-webkit-scrollbar-track{ background: transparent; border-radius:6px; }
+#popular-tags::-webkit-scrollbar-thumb{
+	background: rgba(255,255,255,0.1);
+	border-radius:6px;
+	min-width:36px; /* thumb has a sensible minimum hit area */
+	transition: background .12s linear, opacity .12s linear;
+}
+#popular-tags:hover::-webkit-scrollbar-thumb{ background: rgba(255,255,255,0.2); }
+
+/* Firefox scrollbar hints */
+#popular-tags{ scrollbar-color: rgba(255,255,255,0.1) transparent; scrollbar-width: thin; }
 .tag-pill{ background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); padding:10px 16px; border-radius:14px; color:var(--muted); cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:all .12s ease; }
 .tag-pill .count{ font-size:12px; background: rgba(0,0,0,0.15); padding:2px 6px; border-radius:8px; margin-left:6px; color:var(--muted); }
 .tag-pill.selected{ background:var(--accent); color:#fff; box-shadow:0 6px 18px rgba(0,110,255,0.12); }

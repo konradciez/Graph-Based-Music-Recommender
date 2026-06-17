@@ -25,7 +25,6 @@ def get_popular_tags():
         coalesce(t.tag, t.name) AS tag_name, 
         count(*) AS popularity
     ORDER BY popularity DESC
-    LIMIT 20
     """
     try:
         records = db.execute_read(cypher_query)

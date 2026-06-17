@@ -78,8 +78,8 @@ async function loadPopularTags(){
 		stack.appendChild(row);
 		return;
 	}
-	// show top N popular tags as the first row
-	const topTags = tags.slice(0, TAGS_PER_ROW);
+	// show top N popular tags (first row) - request up to 100 from backend
+	const topTags = tags.slice(0, 100);
 	createTagRow(topTags, 0);
 }
 
@@ -135,6 +135,8 @@ function createTagRow(items, rowIndex){
 	const stack = document.getElementById('tags-stack');
 	const row = document.createElement('div');
 	row.className = 'tags-row';
+	// mark the initial/top row so we can style it (max-width + horizontal scroll)
+	if(rowIndex === 0) row.id = 'popular-tags';
 	row.dataset.row = String(rowIndex);
 	if(!items || items.length === 0){
 		row.classList.add('no-suggestions');
@@ -158,6 +160,11 @@ function createTagRow(items, rowIndex){
 		row.appendChild(btn);
 	});
 	stack.appendChild(row);
+	// ensure popular row is left-aligned and scrolled to start
+	if(rowIndex === 0){
+		row.scrollLeft = 0;
+		row.style.justifyContent = 'flex-start';
+	}
 	// mark previous rows inactive
 	Array.from(stack.children).forEach(r=>{ if(r !== row) r.classList.add('inactive-row'); else r.classList.remove('inactive-row'); });
 	highlightSelectedButtons();
