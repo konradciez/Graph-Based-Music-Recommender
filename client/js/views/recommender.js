@@ -44,11 +44,11 @@ export async function renderRecommender(){
 		<div class="filters">
 			<div class="filter-item">
 				<label><input id="energy-match" type="checkbox" /> Energy Match</label>
-				<div class="number-control" data-role="energy" data-min="0" data-max="100"><button class="nav-btn small dec">-</button><span class="value">10</span><span class="suffix">%</span><button class="nav-btn small inc">+</button></div>
+				<div class="number-control" data-role="energy" data-min="0" data-max="100"><button class="nav-btn small dec">-</button><span class="suffix">±</span><span class="value">10</span><span class="suffix">%</span><button class="nav-btn small inc">+</button></div>
 			</div>
 			<div class="filter-item">
 				<label><input id="year-match" type="checkbox" /> Year Match</label>
-				<div class="number-control" data-role="year" data-min="0"><button class="nav-btn small dec">-</button><span class="value">3</span><button class="nav-btn small inc">+</button></div>
+				<div class="number-control" data-role="year" data-min="0"><button class="nav-btn small dec">-</button><span class="suffix">±</span><span class="value">3</span><button class="nav-btn small inc">+</button></div>
 			</div>
 			<div class="filter-item artist-only">
 				<label><input id="only-artist" type="checkbox" /> Only THIS Artist</label>

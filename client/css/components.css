@@ -14,7 +14,7 @@
 .range-values{ margin-left:12px; color:var(--muted) }
 
 .number-control{ display:inline-flex; align-items:center; gap:8px }
-.number-control .value{ min-width:30px; text-align:center; display:inline-block }
+.number-control .value{ min-width:20px; text-align:center; display:inline-block }
 .number-control .nav-btn.small{ padding:6px 8px; font-size:14px; border-radius:12px }
 
 /* Make numeric inputs with .value look like the span.value used elsewhere */
@@ -23,7 +23,7 @@
 .number-control input.value::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0 }
 .number-control input.value{ -moz-appearance:textfield }
 .range-controls .separator{ padding:0 6px }
-.number-control .suffix{ color:var(--muted); font-size:13px }
+.number-control .suffix{ font-size:13px }
 
 .nav-btn.small{ padding:6px 8px; font-size:14px; border-radius:12px }
 .nav-btn{ background:transparent; border:1px solid rgba(255,255,255,0.04); color:var(--muted); padding:6px 10px; border-radius:14px; cursor:pointer }
