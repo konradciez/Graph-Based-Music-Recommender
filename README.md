@@ -2,6 +2,8 @@
 
 Konrad Ciężadło
 
+Na podstawie zbioru: https://www.kaggle.com/datasets/undefinenull/million-song-dataset-spotify-lastfm
+
 ---
 
 # Dokumentacja
