@@ -64,7 +64,7 @@ def get_related_tags():
         related_tag, 
         count(*) AS frequency
     ORDER BY frequency DESC
-    LIMIT 15
+    LIMIT 6
     """
     try:
         records = db.execute_read(cypher_query, {"selected_tags": selected_tags})
